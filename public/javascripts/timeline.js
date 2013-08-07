@@ -3,32 +3,38 @@ $(document).ready(function() {
 	var currentCard = cards.last().addClass('current');
 
 	function initialize() {
-		renderLastTwelveCards(currentCard);
+		renderLastTenCards(currentCard.data('index'));
 
-		var checkers = $('li.checker');
-		checkers.hover(function() {
+		$('li.checker').hover(function() {
 			var index = $(this).data('index');
-			console.log(index);
-			currentCard.removeClass('current');
-			currentCard = cards.eq(index).addClass('current');
-			currentCard.nextAll().hide();
+			renderLastTenCards(index);
+		});
 
-			renderLastTwelveCards(currentCard);
+		cards.click(function() {
+			var index = $(this).data('index');
+			renderLastTenCards(index);
 		});
 	}
 
 
-	function getLastTwelveCards(current) {
-		var elements = current.prevAll().slice(0, 11).get();
+	function getLastTenCards(current) {
+		var elements = current.prevAll().slice(0, 9).get();
 		elements.push(current);
 		return $(elements);
 	}
 
 
-	function renderLastTwelveCards(current) {
-		current.prevAll().hide();
-		getLastTwelveCards(current).each(function(index) {
-			$(this).show().css('-webkit-transform', 'translateZ(' + 50 * index + 'px)');
+	function renderLastTenCards(selectedCardIndex) {
+		currentCard.removeClass('current');
+		currentCard = cards.eq(selectedCardIndex).addClass('current');
+		currentCard.nextAll().hide();
+
+		currentCard.prevAll().hide();
+		getLastTenCards(currentCard).each(function(index) {
+			$(this).show().css({
+				'-webkit-transform': 'translateZ(' + 60 * index + 'px)',
+				'opacity': 0.1 * (index + 1)
+			});
 		});
 	}
 
