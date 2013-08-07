@@ -1,0 +1,10 @@
+{
+	"fisheye": {
+		"auth": {
+			"userName": "leik",
+			"password": "Sucy6330133"
+		},
+		"hostname": "fisheye",
+		"repositories": ["OrionPlatform", "Orchestral", "BreastScreening", "Forms", "Implementation", "Rhapsody", "Concerto", "PITInterfaces", "PITPackages", "SopranoMedicalRecords", "SopranoResultsViewer"]
+	}
+}
