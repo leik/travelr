@@ -11,6 +11,8 @@
   ],
   "dependencies": {
     "jquery": "git://github.com/components/jquery.git#~2.0.3",
-    "font-awesome": "git://github.com/FortAwesome/Font-Awesome.git#~3.2.1"
+    "font-awesome": "git://github.com/FortAwesome/Font-Awesome.git#~3.2.1",
+    "fancybox": "~2.1.5",
+    "jquery-mousewheel": "~3.1.3"
   }
 }
