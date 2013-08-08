@@ -4,14 +4,16 @@ html
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.min.css')
+		script(src='/components/prefix-free/prefixfree.min.js')
 		script(src='/components/jquery/jquery.min.js')
+		script(src='/components/jquery-mousewheel/jquery.mousewheel.js')
 		script(src='/javascripts/timeline.js')
 	body
 		div.viewport
 			div
 				div.nav.left-aligned
 					h3 Time
-					ul
+					ul.time
 						each revision, i in revisions
 							li.checker(data-index=i)
 								span.icon-time
@@ -29,7 +31,7 @@ html
 									div #{revision.date}
 				div.nav.right-aligned
 					h3 Revisions
-					ul
+					ul.revisions
 						each revision, i in revisions
 							li.checker(data-index=i)
 								span.icon-upload
