@@ -5,49 +5,49 @@ $(document).ready(function() {
 		revisionCheckers = $('ul.revisions li.checker');
 
 	function initialize() {
-		renderLastTenCards(currentIndex);
+		renderVisibleCards(currentIndex);
 
 		$('li.checker').click(function() {
 			var index = $(this).data('index');
-			renderLastTenCards(index);
+			renderVisibleCards(index);
 		});
 
 		cards.click(function() {
 			var index = $(this).data('index');
-			renderLastTenCards(index);
+			renderVisibleCards(index);
 		});
 
 		$(document).keydown(function(event) {
 			console.log(currentIndex);
 			switch (event.keyCode) {
 				case 38:
-					renderLastTenCards(currentIndex - 1);
+					renderVisibleCards(currentIndex - 1);
 					break;
 				case 40:
-					renderLastTenCards(currentIndex + 1);
+					renderVisibleCards(currentIndex + 1);
 					break;
 			}
 		});
 
-		$('ul.time, ul.revisions').mousewheel(function(event,delta, deltaX, deltaY) {
-			if (delta > 0 ){
-				renderLastTenCards(currentIndex - 1);
-			} else if (delta < 0){
-				renderLastTenCards(currentIndex + 1);
+		$('ul.time, ul.revisions').mousewheel(function(event, delta, deltaX, deltaY) {
+			if (delta > 0) {
+				renderVisibleCards(currentIndex - 1);
+			} else if (delta < 0) {
+				renderVisibleCards(currentIndex + 1);
 			}
 		});
 
 	}
 
-	function getLastTenCards(current) {
-		var elements = current.prevAll().slice(0, 9).get().reverse();
+	function getVisibleCards(current, numberOfCards) {
+		var elements = current.prevAll().slice(0, numberOfCards - 1).get().reverse();
 		elements.push(current);
 		return $(elements);
 	}
 
 
-	function renderLastTenCards(selectedCardIndex) {
-		if (selectedCardIndex && selectedCardIndex >= 0 && selectedCardIndex < cards.size()) {
+	function renderVisibleCards(selectedCardIndex) {
+		if (selectedCardIndex >= 0 && selectedCardIndex < cards.size()) {
 			var oldSelectedIndex = currentIndex;
 
 			currentIndex = selectedCardIndex;
@@ -62,11 +62,14 @@ $(document).ready(function() {
 
 			currentCard.nextAll().hide();
 			currentCard.prevAll().hide();
-			getLastTenCards(currentCard).each(function(index) {
-				$(this).show().css({
-					'-webkit-transform': 'translateZ(' + 60 * index + 'px)',
-					'opacity': 0.1 * (index + 1)
-				});
+
+			var visibleCards = getVisibleCards(currentCard, 10);
+			visibleCards.each(function(index) {
+				var position = visibleCards.size() < 10 ? index + 10 - visibleCards.size() : index;
+				var cssObject = {};
+				cssObject[PrefixFree.prefixCSS('transform')] = 'translateZ(' + position * 60 + 'px)';
+				cssObject[PrefixFree.prefixCSS('opacity')] = 0.1 * (position + 1);
+				$(this).show().css(cssObject);
 			});
 		}
 	}

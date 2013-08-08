@@ -2,6 +2,7 @@ doctype 5
 html
 	head
 		title= title
+		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Inconsolata')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.min.css')
 		script(src='/components/prefix-free/prefixfree.min.js')
@@ -12,15 +13,13 @@ html
 		div.viewport
 			div
 				div.nav.left-aligned
-					h3 Time
+					h1 Time
 					ul.time
 						each revision, i in revisions
 							li.checker(data-index=i)
 								span.icon-time
 									&nbsp;
 								span= revision.date
-
-
 				div.center
 					div.container
 						div.card-space
@@ -30,7 +29,7 @@ html
 									div #{revision.revision}
 									div #{revision.date}
 				div.nav.right-aligned
-					h3 Revisions
+					h1 Revisions
 					ul.revisions
 						each revision, i in revisions
 							li.checker(data-index=i)
