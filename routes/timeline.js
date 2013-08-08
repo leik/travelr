@@ -1,6 +1,7 @@
 var config = require('../config'),
 	auth = require('../lib/auth'),
 	HistoryQuery = require('../lib/history-query'),
+	SourceQuery = require('../lib/source-query'),
 	url = require('url'),
 	_ = require('underscore'),
 	formatter = require('../lib/simple_formatter');
@@ -9,12 +10,12 @@ function getHistoryByPath(req, res, token, path) {
 	new HistoryQuery(token, 'OrionPlatform', path).process(function(data){
 		// res.send(data);
 		// res.render('timeline', {revisions: formatter.format(data, 'OrionPlatform')});
-		// console.log(JSON.stringify(data, 4));
-		res.render('timeline', {revisions: formatter.format(data.fileRevision.reverse())});
+		console.log(JSON.stringify(data, 4));
+		res.render('timeline', {revisions: formatter.format(data.fileRevision.reverse()), fisheyeHostName: config.fisheye.hostname});
 	});
 }
 
-exports.data = function(req, res) {
+exports.history = function(req, res) {
 
 	var url_parts = url.parse(req.url, true),
 		queryParams = url_parts.query,
@@ -29,4 +30,14 @@ exports.data = function(req, res) {
 		});
 	}
 
+};
+
+exports.source = function(req, res) {
+	var url_parts = url.parse(req.url, true),
+		queryParams = url_parts.query;
+
+	new SourceQuery(queryParams.contentLink).process(function(data){
+		console.log(data);
+		res.send(data);
+	});
 };

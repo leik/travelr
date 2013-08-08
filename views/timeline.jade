@@ -5,9 +5,11 @@ html
 		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Inconsolata')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.min.css')
+		link(rel='stylesheet', href='/components/fancybox/source/jquery.fancybox.css')
 		script(src='/components/prefix-free/prefixfree.min.js')
 		script(src='/components/jquery/jquery.min.js')
 		script(src='/components/jquery-mousewheel/jquery.mousewheel.js')
+		script(src='/components/fancybox/source/jquery.fancybox.pack.js')
 		script(src='/javascripts/timeline.js')
 	body
 		div.viewport
@@ -20,14 +22,21 @@ html
 								span.icon-time
 									&nbsp;
 								span= revision.date
+
 				div.center
 					div.container
 						div.card-space
 							each revision, i in revisions
-								div.card.border-shadow(data-index=i)
-									div #{revision.comment}
-									div #{revision.revision}
-									div #{revision.date}
+								div.card.border-shadow(data-index=i, data-content-link=revision.contentLink)
+									div.card-header.right-aligned
+										div.icon-upload Rev: #{revision.revision}
+									div.card-body
+										div #{revision.comment}
+									div.card-footer.right-aligned
+										div.icon-time Time: #{revision.date}
+									div.open-code
+										a.icon-code.fancybox(href=revision.contentLink, data-fancybox-type='iframe')
+
 				div.nav.right-aligned
 					h1 Revisions
 					ul.revisions

@@ -5,6 +5,7 @@ $(document).ready(function() {
 		revisionCheckers = $('ul.revisions li.checker');
 
 	function initialize() {
+
 		renderVisibleCards(currentIndex);
 
 		$('li.checker').click(function() {
@@ -22,9 +23,18 @@ $(document).ready(function() {
 			switch (event.keyCode) {
 				case 38:
 					renderVisibleCards(currentIndex - 1);
+					if ($('.fancybox-overlay').size()>0) {
+						cards.eq(currentIndex).find('a.fancybox').click();
+					}
 					break;
 				case 40:
 					renderVisibleCards(currentIndex + 1);
+					if ($('.fancybox-overlay').size()>0) {
+						cards.eq(currentIndex).find('a.fancybox').click();
+					}
+					break;
+				case 13:
+					cards.eq(currentIndex).find('a.fancybox').click();
 					break;
 			}
 		});
@@ -37,6 +47,7 @@ $(document).ready(function() {
 			}
 		});
 
+		$('a.fancybox').fancybox();
 	}
 
 	function getVisibleCards(current, numberOfCards) {
