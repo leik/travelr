@@ -19,7 +19,6 @@ $(document).ready(function() {
 		});
 
 		$(document).keydown(function(event) {
-			console.log(currentIndex);
 			switch (event.keyCode) {
 				case 38:
 					renderVisibleCards(currentIndex - 1);
@@ -48,6 +47,10 @@ $(document).ready(function() {
 		});
 
 		$('a.fancybox').fancybox();
+		$('a.annotated').click(function(event){
+			event.preventDefault();
+			window.open($(this).attr('href'), 'Annotated Source', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, height=1200, width=1600, centerscreen=true, chrome=yes');
+		});
 	}
 
 	function getVisibleCards(current, numberOfCards) {

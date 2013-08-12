@@ -103,10 +103,20 @@ div.open-code
 	left:10px
 }
 
-.icon-code:hover
+a,a:visited
+{
+	color:#000
+}
+
+.icon-code:hover,.icon-external-link:hover
 {
 	color:orange;
 	cursor:pointer
+}
+
+div.open-code a
+{
+	margin-right:5px
 }
 
 .card-header > div,.card-footer > div
@@ -176,4 +186,26 @@ div.open-code
 {
 	text-align:right;
 	padding-right:10px
+}
+
+.tooltip
+{
+	position:absolute;
+	bottom:50px;
+	left: 50%;
+	margin-left: -460px;
+	height:36px;
+	width:920px;
+	background-image:url(/images/barbackground.png);
+	font-size:14px;
+	text-align:center;
+	vertical-align:middle;
+	border-radius:4px;
+	box-shadow:0 0 100px #FFF;
+}
+
+.tooltip-text {
+	margin-top: 10px;
+	color: white;
+	text-shadow:1px 1px 1px black;
 }

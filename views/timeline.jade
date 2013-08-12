@@ -35,7 +35,8 @@ html
 									div.card-footer.right-aligned
 										div.icon-time Time: #{revision.date}
 									div.open-code
-										a.icon-code.fancybox(href=revision.contentLink, data-fancybox-type='iframe')
+										a.icon-code.fancybox.raw(href=revision.paths.raw, data-fancybox-type='iframe')
+										a.icon-external-link.annotated(href=revision.paths.annotated, target='_blank')
 
 				div.nav.right-aligned
 					h1 Revisions
@@ -45,4 +46,15 @@ html
 								span.icon-upload
 									&nbsp;
 								span= revision.revision
+		div.tooltip
+			div.tooltip-text
+				span [
+				span.icon-arrow-down
+				span /
+				span.icon-arrow-up ]:
+				span &nbsp;Travel through time.
+				span &nbsp;[Enter]: Show raw source.
+				span &nbsp;[ESC]: Close raw source.
+				span &nbsp;Mousewheel works on Time and Revisions axises.
+
 
